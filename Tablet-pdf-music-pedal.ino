@@ -1,9 +1,15 @@
 #include <Bounce2.h>
+#include "Keyboard.h"
+
 #define BUTTON_PIN_LEFT 14
 #define LED_PIN_LEFT 9
 #define BUTTON_PIN_RIGHT 15
 #define LED_PIN_RIGHT 10
 #define LED_POWER 8
+
+// Keys reference: https://github.com/arduino-libraries/Keyboard/blob/master/src/Keyboard.h
+#define PREV_PAGE KEY_LEFT_ARROW     
+#define NEXT_PAGE KEY_RIGHT_ARROW
 
 // Instantiate a Bounce object
 Bounce debouncer_left = Bounce();
@@ -64,7 +70,7 @@ void loop() {
 		}
 		else {
 			digitalWrite(LED_PIN_LEFT, HIGH);
-			Keyboard.write('P');
+			Keyboard.write(PREV_PAGE);
 			buttonState_left = 1;
 			Serial.println("Button pressed (state 1)");
 			buttonPressTimeStamp_left = millis();
@@ -84,11 +90,10 @@ void loop() {
 		}
 		else {
 			digitalWrite(LED_PIN_RIGHT, HIGH);
-			Keyboard.write('N');
+			Keyboard.write(NEXT_PAGE);
 			buttonState_right = 1;
 			Serial.println("Button pressed right (state 1)");
 			buttonPressTimeStamp_right = millis();
 		}
 	}
 }
-
